@@ -4,30 +4,30 @@ import BottleIcon from "./BottleIcon.jsx";
 import { C, serif } from "../theme.js";
 import { formatPrice } from "../utils/format.js";
 import { useModalEffects } from "../hooks/useModalEffects.js";
+import { useDismiss } from "../hooks/useDismiss.js";
 
 export default function WineDetail({ wine, onClose, onAdd }) {
   const [qty, setQty] = useState(1);
-  useModalEffects(onClose);
+  const { closing, dismiss } = useDismiss(onClose);
+  useModalEffects(dismiss);
 
   return (
     <div
-      onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in"
+      onClick={dismiss}
+      className={`fixed inset-0 z-50 flex items-center justify-center p-4 ${closing ? "animate-fade-out" : "animate-fade-in"}`}
       style={{ background: "rgba(34,31,26,0.5)" }}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-full sm:max-w-md max-h-[88vh] flex flex-col rounded-xl overflow-hidden animate-modal-in"
+        className={`w-full sm:max-w-md max-h-[88vh] flex flex-col rounded-xl overflow-hidden ${closing ? "animate-modal-out" : "animate-modal-in"}`}
         style={{ background: C.card }}
       >
-        {/* Header fijo */}
         <div className="shrink-0 flex justify-end p-2 border-b" style={{ borderColor: C.border }}>
-          <button onClick={onClose} aria-label="Cerrar" className="p-1">
+          <button onClick={dismiss} aria-label="Cerrar" className="p-1">
             <X size={20} color={C.textSoft} />
           </button>
         </div>
 
-        {/* Contenido scrolleable */}
         <div className="flex-1 overflow-y-auto">
           <div className="flex items-center justify-center py-8" style={{ background: "#F3EFE4" }}>
             <BottleIcon tipo={wine.tipo} size={130} />
@@ -53,7 +53,6 @@ export default function WineDetail({ wine, onClose, onAdd }) {
           </div>
         </div>
 
-        {/* Footer fijo */}
         <div className="shrink-0 p-4 border-t" style={{ borderColor: C.border, background: C.card }}>
           <div className="flex items-center justify-between mb-3">
             <span className="text-xl" style={{ ...serif, color: C.text }}>{formatPrice(wine.precio)}</span>
@@ -64,7 +63,7 @@ export default function WineDetail({ wine, onClose, onAdd }) {
             </div>
           </div>
           <button
-            onClick={() => { onAdd(wine, qty); }}
+            onClick={() => { onAdd(wine, qty); onClose(); }}
             className="w-full py-3 rounded-md text-sm font-medium"
             style={{ background: C.accent, color: "#FFF6F0" }}
           >

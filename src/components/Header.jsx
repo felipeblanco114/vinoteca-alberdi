@@ -16,13 +16,13 @@ export default function Header({ cartCount, onCartClick }) {
         borderBottom: scrolled ? `1px solid ${C.border}` : "1px solid transparent",
       }}
     >
-      <div className="w-full px-6 md:px-10 py-5 flex items-center justify-between">
-        <img src={logo} alt="Vinoteca Alberdi" className="h-11" />
+      <div className="w-full px-6 md:px-12 py-5 md:py-7 flex items-center justify-between">
+        <img src={logo} alt="Vinoteca Alberdi" className="h-11 md:h-16" />
         <button onClick={onCartClick} className="relative p-2" aria-label="Ver carrito">
           <ShoppingBag
             size={24}
-            color={scrolled ? C.headerScrolledText : C.headerText}
-            className="transition-colors duration-300"
+            color={scrolled ? C.headerScrolledText : "#FFF8ED"}
+            className="transition-colors duration-300 md:scale-125"
           />
           {cartCount > 0 && (
             <span

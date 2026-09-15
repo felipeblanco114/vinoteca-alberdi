@@ -1,4 +1,4 @@
-import { C, serif } from "../theme.js";
+import { serif } from "../theme.js";
 import banner from "../img/club-banner.png";
 
 export default function ClubBanner({ onOpen }) {
@@ -12,19 +12,18 @@ export default function ClubBanner({ onOpen }) {
         backgroundPosition: "center",
       }}
     >
-      <div className="w-full px-6 md:px-10 pb-6 flex items-center justify-between gap-4">
+      <div className="mx-auto w-[90%] md:w-[70%] pb-8 flex items-center justify-between gap-4" style={{ marginBottom: '2rem', fontSize: '15rem'}}>
         <div>
-          <p className="text-2xl md:text-3xl mb-1" style={{ ...serif, color: "#FFF8ED" }}>
+          <p className="text-4xl md:text-5xl mb-2" style={{ ...serif, color: "#FFF8ED" }}>
             El Club del Vino
           </p>
-          <p className="text-sm" style={{ color: "#EDE7D8" }}>
+          <p className="text-base md:text-lg" style={{ color: "#EDE7D8" }}>
             Una caja curada cada mes, para socios.
           </p>
         </div>
         <button
           onClick={onOpen}
-          className="shrink-0 px-5 py-3 rounded-md text-sm font-medium cursor-pointer"
-          style={{ background: C.accent, color: "#FFF6F0" }}
+          className="club-btn shrink-0 px-6 py-3 rounded-md text-sm font-medium cursor-pointer"
         >
           Conocer más
         </button>

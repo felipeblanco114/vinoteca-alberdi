@@ -2,10 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* button {
-    font-family: 'Hilsfiger', ui-sans-serif, system-ui, sans-serif;
-    font-weight: 400;
-} */
+body {
+    font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+}
 
 button,
 a,
@@ -44,7 +43,41 @@ button:focus-visible {
 
 @media (prefers-reduced-motion: reduce) {
   .animate-modal-in,
-  .animate-fade-in {
+  .animate-fade-in,
+  .animate-modal-out,
+  .animate-fade-out {
     animation: none;
   }
-}                                               
+}        
+
+.club-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 248, 237, 0.301);
+  color: #FFF8ED;
+  transition: background 250ms ease, backdrop-filter 250ms ease;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.club-btn:hover {
+  background: rgba(255, 248, 237, 0.15);
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+}
+
+@keyframes modal-out {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(16px) scale(0.98); }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+.animate-modal-out {
+  animation: modal-out 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-out {
+  animation: fade-out 180ms ease-in forwards;
+}

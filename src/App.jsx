@@ -63,7 +63,7 @@ export default function App() {
 
       <ClubBanner onOpen={() => setClubOpen(true)} />
 
-      <main className="max-w-5xl mx-auto px-4 pt-8 pb-8">
+      <main className="mx-auto w-full lg:w-[70%] px-4 pt-8 pb-8">
         <FilterBar
           query={query}
           setQuery={setQuery}

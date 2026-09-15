@@ -5,9 +5,11 @@ import { formatPrice } from "../utils/format.js";
 import { useModalEffects } from "../hooks/useModalEffects.js";
 import { buildOrderMessage, buildWhatsAppUrl } from "../utils/whatsapp.js";
 import { WHATSAPP_NUMBER } from "../config.js";
+import { useDismiss } from "../hooks/useDismiss.js";
 
 export default function CartDrawer({ items, onClose, onQtyChange, delivery, setDelivery }) {
-  useModalEffects(onClose);
+  const { closing, dismiss } = useDismiss(onClose);
+  useModalEffects(dismiss);
 
   const total = items.reduce((sum, i) => sum + i.wine.precio * i.qty, 0);
 
@@ -28,11 +30,11 @@ export default function CartDrawer({ items, onClose, onQtyChange, delivery, setD
   }
 
   return (
-    <div onClick={onClose} className="fixed inset-0 z-50 flex justify-end" style={{ background: "rgba(34,31,26,0.5)" }}>
-      <div onClick={(e) => e.stopPropagation()} className="w-full max-w-sm h-full flex flex-col" style={{ background: C.card }}>
+    <div onClick={dismiss} className={`fixed inset-0 z-50 flex justify-end ${closing ? "animate-fade-out" : "animate-fade-in"}`} style={{ background: "rgba(34,31,26,0.5)" }}>
+      <div onClick={(e) => e.stopPropagation()} className={`w-full max-w-sm h-full flex flex-col ${closing ? "animate-modal-out" : "animate-modal-in"}`} style={{ background: C.card }}>
         <div className="shrink-0 flex items-center justify-between p-4 border-b" style={{ borderColor: C.border }}>
           <h2 className="text-lg" style={{ ...serif, color: C.text }}>Tu pedido</h2>
-          <button onClick={onClose} aria-label="Cerrar"><X size={20} color={C.textSoft} /></button>
+          <button onClick={dismiss} aria-label="Cerrar"><X size={20} color={C.textSoft} /></button>
         </div>
 
         <div className="flex-1 overflow-y-auto p-4">
