@@ -1,5 +1,5 @@
 import { C, serif } from "../theme.js";
-import banner from "../img/club-banner.jpg";
+import banner from "../img/club-banner.png";
 
 export default function ClubBanner({ onOpen }) {
   return (
