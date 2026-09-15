@@ -76,7 +76,7 @@ export default function App() {
 
         <WineGrid wines={filtered} onOpen={setSelectedWine} />
 
-        <button
+        {/* <button
           onClick={() => setClubOpen(true)}
           className="w-full rounded-lg p-5 flex items-center justify-between text-left"
           style={{ background: C.accentSoft, border: `1px solid ${C.border}` }}
@@ -86,7 +86,7 @@ export default function App() {
             <p className="text-sm" style={{ color: C.textSoft }}>Una caja curada cada mes, para socios.</p>
           </div>
           <span className="text-sm underline" style={{ color: C.accent }}>Conocer más</span>
-        </button>
+        </button> */}
       </main>
 
       <footer className="text-center text-xs text-ink-soft py-8 px-6">
