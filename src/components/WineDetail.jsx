@@ -12,12 +12,12 @@ export default function WineDetail({ wine, onClose, onAdd }) {
   return (
     <div
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in"
       style={{ background: "rgba(34,31,26,0.5)" }}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-full sm:max-w-md h-full sm:h-auto sm:max-h-[90vh] flex flex-col sm:rounded-lg overflow-hidden"
+        className="w-full sm:max-w-md max-h-[88vh] flex flex-col rounded-xl overflow-hidden animate-modal-in"
         style={{ background: C.card }}
       >
         {/* Header fijo */}

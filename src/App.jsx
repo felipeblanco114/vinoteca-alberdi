@@ -8,6 +8,7 @@ import WineDetail from "./components/WineDetail.jsx";
 import CartDrawer from "./components/CartDrawer.jsx";
 import ClubModal from "./components/ClubModal.jsx";
 import { serif } from "./theme.js";
+import ClubBanner from "./components/ClubBanner.jsx";
 
 export default function App() {
   const [query, setQuery] = useState("");
@@ -60,7 +61,9 @@ export default function App() {
     <div className="min-h-screen" style={{ background: C.bg }}>
       <Header cartCount={cartCount} onCartClick={() => setCartOpen(true)} />
 
-      <main className="max-w-5xl mx-auto px-4 py-6">
+      <ClubBanner onOpen={() => setClubOpen(true)} />
+
+      <main className="max-w-5xl mx-auto px-4 pt-8 pb-8">
         <FilterBar
           query={query}
           setQuery={setQuery}
@@ -104,7 +107,7 @@ export default function App() {
         />
       )}
 
-      {clubOpen && <ClubModal onClose={() => setClubOpen(false)} />}
+      {/* {clubOpen && <ClubModal onClose={() => setClubOpen(false)} />} */}
     </div>
   );
 }

@@ -19,4 +19,32 @@ a *,
 [role="button"] * {
   user-select: none;
 }
-                                                
+button:focus-visible {
+    outline: none;
+    box-shadow: none;
+}
+
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-modal-in {
+  animation: modal-in 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-fade-in {
+  animation: fade-in 180ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-modal-in,
+  .animate-fade-in {
+    animation: none;
+  }
+}                                               

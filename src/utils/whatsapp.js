@@ -5,7 +5,7 @@ export function buildOrderMessage(items, delivery, total) {
     ({ wine, qty }) => `- ${qty}x ${wine.nombre} (${wine.bodega}) — ${formatPrice(wine.precio * qty)}`
   );
 
-  const entrega = delivery.tipo === "retiro" ? "Retiro en Coronel Suárez" : `Envío a ${delivery.localidad}`;
+  const entrega = delivery.tipo === "retiro" ? "De Coronel Suárez" : `Envío a ${delivery.localidad}`;
 
   const message = [
     "Hola! Quiero hacer este pedido:",
@@ -14,7 +14,7 @@ export function buildOrderMessage(items, delivery, total) {
     "",
     `Total: ${formatPrice(total)}`,
     "",
-    `Entrega: ${entrega}`,
+    `${entrega}`,
     `Dirección: ${delivery.direccion}`,
     `A nombre de: ${delivery.nombre}`,
   ].join("\n");
