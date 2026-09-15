@@ -87,7 +87,7 @@ export default function CartDrawer({ items, onClose, onQtyChange, delivery, setD
                       placeholder="Localidad"
                       value={localidad}
                       onChange={(e) => setDelivery((d) => ({ ...d, localidad: e.target.value }))}
-                      className="flex-1 text-sm outline-none"
+                      className="flex-1 text-base outline-none"
                     />
                   </div>
                 )}
@@ -95,14 +95,14 @@ export default function CartDrawer({ items, onClose, onQtyChange, delivery, setD
                   placeholder="Dirección"
                   value={direccion}
                   onChange={(e) => setDelivery((d) => ({ ...d, direccion: e.target.value }))}
-                  className="text-sm outline-none border rounded-md px-2 py-2"
+                  className="text-base outline-none border rounded-md px-2 py-2"
                   style={{ borderColor: C.border }}
                 />
                 <input
                   placeholder="A nombre de"
                   value={nombre}
                   onChange={(e) => setDelivery((d) => ({ ...d, nombre: e.target.value }))}
-                  className="text-sm outline-none border rounded-md px-2 py-2"
+                  className="text-base outline-none border rounded-md px-2 py-2"
                   style={{ borderColor: C.border }}
                 />
               </div>
