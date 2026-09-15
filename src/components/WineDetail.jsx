@@ -64,7 +64,7 @@ export default function WineDetail({ wine, onClose, onAdd }) {
             </div>
           </div>
           <button
-            onClick={() => { onAdd(wine, qty); onClose(); }}
+            onClick={() => { onAdd(wine, qty); }}
             className="w-full py-3 rounded-md text-sm font-medium"
             style={{ background: C.accent, color: "#FFF6F0" }}
           >
