@@ -1,19 +1,13 @@
-import { useEffect } from "react";
 import { X, Wine as WineIcon } from "lucide-react";
 import { C, serif } from "../theme.js";
+import { useModalEffects } from "../hooks/useModalEffects.js";
 
 export default function ClubModal({ onClose }) {
-  useEffect(() => {
-    function handleKeyDown(e) {
-      if (e.key === "Escape") onClose();
-    }
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [onClose]);
+  useModalEffects(onClose);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: "rgba(34,31,26,0.5)" }}>
-      <div className="w-full max-w-sm rounded-lg p-6" style={{ background: C.card }}>
+    <div onClick={onClose} className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: "rgba(34,31,26,0.5)" }}>
+      <div onClick={(e) => e.stopPropagation()} className="w-full max-w-sm rounded-lg p-6" style={{ background: C.card }}>
         <div className="flex justify-end">
           <button onClick={onClose} aria-label="Cerrar"><X size={20} color={C.textSoft} /></button>
         </div>

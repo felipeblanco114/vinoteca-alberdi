@@ -53,7 +53,7 @@ export default function FilterBar({ query, setQuery, filters, setFilters, option
           <Select label="Provincia" field="provincia" />
           <Select label="Precio hasta" field="precio" />
           <div className="col-span-2 md:col-span-4 flex justify-between items-center pt-1">
-            <span className="text-xs" style={{ color: C.textSoft }}>{resultCount} vinos encontrados</span>
+            <span className="text-xs" style={{ color: C.textSoft }}>{resultCount} {resultCount > 1 ? 'vinos econtrados' : 'vino encontrado' }</span>
             <button onClick={onReset} className="text-xs underline" style={{ color: C.accent }}>
               Limpiar filtros
             </button>

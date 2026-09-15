@@ -16,7 +16,7 @@ export default function App() {
   const [cart, setCart] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [clubOpen, setClubOpen] = useState(false);
-  const [delivery, setDelivery] = useState({ tipo: "retiro", localidad: "", direccion: "" });
+  const [delivery, setDelivery] = useState({ tipo: "retiro", localidad: "", direccion: "", nombre: "" });
 
   const options = useMemo(() => ({
     bodega: [...new Set(WINES.map((w) => w.bodega))].sort(),

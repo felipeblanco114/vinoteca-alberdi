@@ -2,27 +2,35 @@ import { X, MapPin, Minus, Plus } from "lucide-react";
 import BottleIcon from "./BottleIcon.jsx";
 import { C, serif } from "../theme.js";
 import { formatPrice } from "../utils/format.js";
+import { useModalEffects } from "../hooks/useModalEffects.js";
 import { buildOrderMessage, buildWhatsAppUrl } from "../utils/whatsapp.js";
 import { WHATSAPP_NUMBER } from "../config.js";
 
 export default function CartDrawer({ items, onClose, onQtyChange, delivery, setDelivery }) {
+  useModalEffects(onClose);
+
   const total = items.reduce((sum, i) => sum + i.wine.precio * i.qty, 0);
+
+  // Los `?? ""` evitan que un campo ausente en el estado tire toda la app abajo.
+  const direccion = delivery.direccion ?? "";
+  const nombre = delivery.nombre ?? "";
+  const localidad = delivery.localidad ?? "";
+
   const canCheckout =
     items.length > 0 &&
-    delivery.direccion.trim() &&
-    delivery.nombre.trim() &&
-    (delivery.tipo === "retiro" || delivery.localidad.trim());
+    direccion.trim() !== "" &&
+    nombre.trim() !== "" &&
+    (delivery.tipo === "retiro" || localidad.trim() !== "");
 
   function handleCheckout() {
     const message = buildOrderMessage(items, delivery, total);
-    const url = buildWhatsAppUrl(WHATSAPP_NUMBER, message);
-    window.open(url, "_blank", "noopener,noreferrer");
+    window.open(buildWhatsAppUrl(WHATSAPP_NUMBER, message), "_blank", "noopener,noreferrer");
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end" style={{ background: "rgba(34,31,26,0.5)" }}>
-      <div className="w-full max-w-sm h-full flex flex-col" style={{ background: C.card }}>
-        <div className="flex items-center justify-between p-4 border-b" style={{ borderColor: C.border }}>
+    <div onClick={onClose} className="fixed inset-0 z-50 flex justify-end" style={{ background: "rgba(34,31,26,0.5)" }}>
+      <div onClick={(e) => e.stopPropagation()} className="w-full max-w-sm h-full flex flex-col" style={{ background: C.card }}>
+        <div className="shrink-0 flex items-center justify-between p-4 border-b" style={{ borderColor: C.border }}>
           <h2 className="text-lg" style={{ ...serif, color: C.text }}>Tu pedido</h2>
           <button onClick={onClose} aria-label="Cerrar"><X size={20} color={C.textSoft} /></button>
         </div>
@@ -31,11 +39,12 @@ export default function CartDrawer({ items, onClose, onQtyChange, delivery, setD
           {items.length === 0 && (
             <p className="text-sm" style={{ color: C.textSoft }}>Todavía no agregaste vinos.</p>
           )}
+
           {items.map(({ wine, qty }) => (
             <div key={wine.id} className="flex items-center gap-3 mb-4">
               <BottleIcon tipo={wine.tipo} size={36} />
-              <div className="flex-1">
-                <p className="text-sm" style={{ color: C.text }}>{wine.nombre}</p>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm truncate" style={{ color: C.text }}>{wine.nombre}</p>
                 <p className="text-xs" style={{ color: C.textSoft }}>{wine.bodega}</p>
               </div>
               <div className="flex items-center gap-2 border rounded-md px-1" style={{ borderColor: C.border }}>
@@ -76,7 +85,7 @@ export default function CartDrawer({ items, onClose, onQtyChange, delivery, setD
                     <MapPin size={14} color={C.textSoft} />
                     <input
                       placeholder="Localidad"
-                      value={delivery.localidad}
+                      value={localidad}
                       onChange={(e) => setDelivery((d) => ({ ...d, localidad: e.target.value }))}
                       className="flex-1 text-sm outline-none"
                     />
@@ -84,14 +93,14 @@ export default function CartDrawer({ items, onClose, onQtyChange, delivery, setD
                 )}
                 <input
                   placeholder="Dirección"
-                  value={delivery.direccion}
+                  value={direccion}
                   onChange={(e) => setDelivery((d) => ({ ...d, direccion: e.target.value }))}
                   className="text-sm outline-none border rounded-md px-2 py-2"
                   style={{ borderColor: C.border }}
                 />
                 <input
                   placeholder="A nombre de"
-                  value={delivery.nombre}
+                  value={nombre}
                   onChange={(e) => setDelivery((d) => ({ ...d, nombre: e.target.value }))}
                   className="text-sm outline-none border rounded-md px-2 py-2"
                   style={{ borderColor: C.border }}
@@ -102,7 +111,7 @@ export default function CartDrawer({ items, onClose, onQtyChange, delivery, setD
         </div>
 
         {items.length > 0 && (
-          <div className="p-4 border-t" style={{ borderColor: C.border }}>
+          <div className="shrink-0 p-4 border-t" style={{ borderColor: C.border }}>
             <div className="flex justify-between mb-3">
               <span className="text-sm" style={{ color: C.textSoft }}>Total</span>
               <span className="text-lg" style={{ ...serif, color: C.text }}>{formatPrice(total)}</span>
