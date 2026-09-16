@@ -107,7 +107,7 @@ export default function App() {
         />
       )}
 
-      {/* {clubOpen && <ClubModal onClose={() => setClubOpen(false)} />} */}
+      {clubOpen && <ClubModal onClose={() => setClubOpen(false)} />} 
     </div>
   );
 }
