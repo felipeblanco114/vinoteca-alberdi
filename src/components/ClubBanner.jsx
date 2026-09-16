@@ -6,7 +6,7 @@ import banner from "../img/club-banner.png";
 
 const CLUB_WINES = [1, 15, 23];
 
-export default function ClubBanner({ onOpen }) {
+export default function ClubBanner({ onOpen, onOpenWine }) {
   const clubWines = CLUB_WINES
     .map((id) => WINES.find((w) => w.id === id))
     .filter(Boolean);
@@ -37,7 +37,7 @@ export default function ClubBanner({ onOpen }) {
           </div>
 
           <p
-            className="text-3xl sm:text-4xl md:text-5xl leading-[1.05] md:leading-[0.95] mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl leading-[1.05] md:leading-[0.95] mb-6 font-[200]"
             style={{ ...serif, color: "#FFF8ED" }}
           >
             Unite al Club del vino, <br />
@@ -72,11 +72,13 @@ export default function ClubBanner({ onOpen }) {
         {/* Grid de vinos: en mobile, grande centrado arriba + 2 chicas centradas abajo en fila */}
         <div className="flex flex-col items-center md:flex-row md:items-stretch gap-4 w-full md:w-auto md:h-[460px]">
           <div className="md:h-full">
-            {clubWines[0] && <WineOfMonthCard wine={clubWines[0]} size="lg" fill />}
+            {clubWines[0] && (
+              <WineOfMonthCard wine={clubWines[0]} size="lg" fill onOpen={onOpenWine} />
+            )}
           </div>
           <div className="flex flex-row justify-center gap-4 md:flex-col md:h-full md:justify-between">
-            {clubWines[1] && <WineOfMonthCard wine={clubWines[1]} size="sm" />}
-            {clubWines[2] && <WineOfMonthCard wine={clubWines[2]} size="sm" />}
+            {clubWines[1] && <WineOfMonthCard wine={clubWines[1]} size="sm" onOpen={onOpenWine} />}
+            {clubWines[2] && <WineOfMonthCard wine={clubWines[2]} size="sm" onOpen={onOpenWine} />}
           </div>
         </div>
       </div>

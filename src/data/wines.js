@@ -1,6 +1,6 @@
 // Demo catalog — swap for real stock data when the client provides it.
 export const WINES = [
-  { id: 1, nombre: "Catena Alta Malbec", bodega: "Catena Zapata", tipo: "Tinto", provincia: "Mendoza", anio: 2021, precio: 42000, notas: "Frutos negros maduros, especias dulces y taninos firmes con final largo." },
+  { id: 1, nombre: "Catena Alta Malbec", bodega: "Catena Zapata", tipo: "Tinto", provincia: "Mendoza", anio: 2021, precio: 42000, notas: "Frutos negros maduros, especias dulces y taninos firmes con final largo.", imagen: 'https://www.bodeboca.com/sites/default/files/wines/2025-01/bot-catenaalta-malbec-2015_0_0_0.jpg' },
   { id: 2, nombre: "Nicasia Vineyard Malbec", bodega: "Zuccardi", tipo: "Tinto", provincia: "Mendoza", anio: 2020, precio: 38000, notas: "Ciruela y violeta, paso untuoso y una acidez que lo mantiene fresco." },
   { id: 3, nombre: "Medalla Cabernet Sauvignon", bodega: "Trapiche", tipo: "Tinto", provincia: "Mendoza", anio: 2019, precio: 35000, notas: "Cassis y pimienta negra, estructura firme, ideal para guardar." },
   { id: 4, nombre: "Malbec DOC", bodega: "Luigi Bosca", tipo: "Tinto", provincia: "Mendoza", anio: 2020, precio: 31000, notas: "Guinda y tabaco, taninos redondos y final especiado." },
@@ -14,7 +14,7 @@ export const WINES = [
   { id: 12, nombre: "Reserva Syrah", bodega: "Finca Flichman", tipo: "Tinto", provincia: "Mendoza", anio: 2020, precio: 15000, notas: "Notas ahumadas y fruta oscura, taninos amables." },
   { id: 13, nombre: "Estate Malbec", bodega: "Colomé", tipo: "Tinto", provincia: "Salta", anio: 2020, precio: 36000, notas: "Viñedos de altura extrema, fruta pura y frescura mineral." },
   { id: 14, nombre: "Old Vines Torrontés", bodega: "El Esteco", tipo: "Blanco", provincia: "Salta", anio: 2022, precio: 17000, notas: "Aromático, floral y frutal, seco de paladar." },
-  { id: 15, nombre: "Alta Chardonnay", bodega: "Catena Zapata", tipo: "Blanco", provincia: "Mendoza", anio: 2021, precio: 30000, notas: "Cítricos y manteca, paso por roble bien equilibrado." },
+  { id: 15, nombre: "Alta Chardonnay", bodega: "Catena Zapata", tipo: "Blanco", provincia: "Mendoza", anio: 2021, precio: 30000, notas: "Cítricos y manteca, paso por roble bien equilibrado.", imagen: 'https://vinotecamx.vtexassets.com/arquivos/ids/1648216/VAB29019-Vinoteca-BCO-CATENA-ALTA-CHARDONNAY-750-ML-001.jpg.jpg?v=639200617239870000' },
   { id: 16, nombre: "Serie A Chardonnay", bodega: "Zuccardi", tipo: "Blanco", provincia: "Mendoza", anio: 2022, precio: 15000, notas: "Fresco y frutado, ideal para el día a día." },
   { id: 17, nombre: "Sauvignon Blanc", bodega: "Rutini", tipo: "Blanco", provincia: "Mendoza", anio: 2022, precio: 19000, notas: "Cítrico y herbáceo, acidez viva y final crocante." },
   { id: 18, nombre: "Sauvignon Blanc", bodega: "Luigi Bosca", tipo: "Blanco", provincia: "Mendoza", anio: 2022, precio: 18000, notas: "Pomelo y hierbas frescas, muy tomable." },
@@ -22,7 +22,7 @@ export const WINES = [
   { id: 20, nombre: "Costa & Pampa Chardonnay", bodega: "Costa & Pampa", tipo: "Blanco", provincia: "Buenos Aires", anio: 2022, precio: 24000, notas: "Perfil atlántico, salino y fresco, acidez marcada." },
   { id: 21, nombre: "Reserva Rosé", bodega: "Norton", tipo: "Rosado", provincia: "Mendoza", anio: 2022, precio: 14000, notas: "Frutos rojos frescos, seco y muy fácil de disfrutar." },
   { id: 22, nombre: "Serie A Rosé", bodega: "Zuccardi", tipo: "Rosado", provincia: "Mendoza", anio: 2022, precio: 13500, notas: "Pomelo rosado y frutilla, ligero y refrescante." },
-  { id: 23, nombre: "Extra Brut", bodega: "Chandon", tipo: "Espumante", provincia: "Mendoza", anio: 2021, precio: 19500, notas: "Burbuja fina, manzana verde y levadura sutil." },
+  { id: 23, nombre: "Extra Brut", bodega: "Chandon", tipo: "Espumante", provincia: "Mendoza", anio: 2021, precio: 19500, notas: "Burbuja fina, manzana verde y levadura sutil.", imagen: 'https://www.espaciovino.com.ar/media/default/0001/73/thumb_72074_default_big.jpeg' },
   { id: 24, nombre: "Brut Nature", bodega: "Baron B", tipo: "Espumante", provincia: "Mendoza", anio: 2020, precio: 25000, notas: "Elaboración tradicional, cítricos y notas de panadería." },
   { id: 25, nombre: "Reserve Brut Nature", bodega: "Cruzat", tipo: "Espumante", provincia: "Mendoza", anio: 2019, precio: 27000, notas: "Crianza prolongada, complejo, con final seco y persistente." },
 ];

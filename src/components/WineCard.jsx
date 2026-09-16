@@ -9,8 +9,12 @@ export default function WineCard({ wine, onOpen }) {
       className="flex flex-col w-full text-left rounded-lg border overflow-hidden cursor-pointer"
       style={{ background: C.card, borderColor: C.border }}
     >
-      <div className="flex items-center justify-center py-8 lg:py-12" style={{ background: "#F3EFE4" }}>
-        <BottleIcon tipo={wine.tipo} size={92} />
+      <div className="flex items-center justify-center h-48 lg:h-64 overflow-hidden" style={{ background: "#F3EFE4" }}>
+        {wine.imagen ? (
+          <img src={wine.imagen} alt={wine.nombre} className="w-full h-full object-cover" />
+        ) : (
+          <BottleIcon tipo={wine.tipo} size={92} />
+        )}
       </div>
       <div className="p-4 lg:p-6">
         <p className="text-xs mb-1" style={{ color: C.textSoft }}>{wine.bodega}</p>

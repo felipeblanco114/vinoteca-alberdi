@@ -61,7 +61,7 @@ export default function App() {
     <div className="min-h-screen" style={{ background: C.bg }}>
       <Header cartCount={cartCount} onCartClick={() => setCartOpen(true)} />
 
-      <ClubBanner onOpen={() => setClubOpen(true)} />
+      <ClubBanner onOpen={() => setClubOpen(true)} onOpenWine={setSelectedWine} />
 
       <main className="mx-auto w-full lg:w-[70%] px-4 pt-8 pb-8">
         <FilterBar

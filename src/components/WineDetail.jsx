@@ -29,8 +29,12 @@ export default function WineDetail({ wine, onClose, onAdd }) {
         </div>
 
         <div className="flex-1 overflow-y-auto">
-          <div className="flex items-center justify-center py-8" style={{ background: "#F3EFE4" }}>
-            <BottleIcon tipo={wine.tipo} size={130} />
+          <div className="flex items-center justify-center py-8 overflow-hidden" style={{ background: "#F3EFE4" }}>
+            {wine.imagen ? (
+              <img src={wine.imagen} alt={wine.nombre} className="w-full h-56 object-cover" />
+            ) : (
+              <BottleIcon tipo={wine.tipo} size={130} />
+            )}
           </div>
           <div className="p-5">
             <p className="text-sm mb-1" style={{ color: C.textSoft }}>{wine.bodega}</p>
