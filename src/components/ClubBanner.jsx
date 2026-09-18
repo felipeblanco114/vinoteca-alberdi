@@ -3,6 +3,7 @@ import { serif } from "../theme.js";
 import { WINES } from "../data/wines.js";
 import WineOfMonthCard from "./WineOfMonthCard.jsx";
 import banner from "../img/club-banner.png";
+import bannerMobile from "../img/banner-mobile.png";
 
 const CLUB_WINES = [1, 15, 23];
 
@@ -14,8 +15,21 @@ export default function ClubBanner({ onOpen, onOpenWine }) {
   return (
     <section className="relative w-full overflow-hidden">
       {/* Fondo: absoluto, se estira solo con el alto que defina el contenido */}
+      {/* Fondo mobile */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 block md:hidden"
+        style={{
+          backgroundImage: `linear-gradient(180deg, rgba(34,31,26,0.1) 0%, rgba(34,31,26,0.65) 100%), url(${bannerMobile})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          filter: "blur(10px)",
+          transform: "scale(1.1)",
+        }}
+      />
+
+      {/* Fondo desktop */}
+      <div
+        className="absolute inset-0 hidden md:block"
         style={{
           backgroundImage: `linear-gradient(180deg, rgba(34,31,26,0.1) 0%, rgba(34,31,26,0.65) 100%), url(${banner})`,
           backgroundSize: "cover",
@@ -70,15 +84,25 @@ export default function ClubBanner({ onOpen, onOpenWine }) {
         </div>
 
         {/* Grid de vinos: en mobile, grande centrado arriba + 2 chicas centradas abajo en fila */}
-        <div className="flex flex-col items-center md:flex-row md:items-stretch gap-4 w-full md:w-auto md:h-[460px]">
-          <div className="md:h-full">
-            {clubWines[0] && (
-              <WineOfMonthCard wine={clubWines[0]} size="lg" fill onOpen={onOpenWine} />
-            )}
+        <div className="flex flex-col items-center md:items-start md:ml-2 w-full md:w-auto">
+          <div
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-4"
+            style={{ background: "rgba(255,248,237,0.12)", border: "1px solid rgba(255,248,237,0.35)" }}
+          >
+            <BadgeCheck size={14} color="#FFF8ED" />
+            <span className="text-xs" style={{ color: "#FFF8ED" }}>Nuestra selección</span>
           </div>
-          <div className="flex flex-row justify-center gap-4 md:flex-col md:h-full md:justify-between">
-            {clubWines[1] && <WineOfMonthCard wine={clubWines[1]} size="sm" onOpen={onOpenWine} />}
-            {clubWines[2] && <WineOfMonthCard wine={clubWines[2]} size="sm" onOpen={onOpenWine} />}
+
+          <div className="flex flex-col items-center md:flex-row md:items-stretch gap-4 w-full md:w-auto md:h-[460px]">
+            <div className="md:h-full">
+              {clubWines[0] && (
+                <WineOfMonthCard wine={clubWines[0]} size="lg" fill onOpen={onOpenWine} />
+              )}
+            </div>
+            <div className="flex flex-row justify-center gap-4 md:flex-col md:h-full md:justify-between">
+              {clubWines[1] && <WineOfMonthCard wine={clubWines[1]} size="sm" onOpen={onOpenWine} />}
+              {clubWines[2] && <WineOfMonthCard wine={clubWines[2]} size="sm" onOpen={onOpenWine} />}
+            </div>
           </div>
         </div>
       </div>
