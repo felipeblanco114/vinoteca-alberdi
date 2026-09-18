@@ -1,18 +1,24 @@
-import { useState, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { C } from "./theme.js";
 import { WINES } from "./data/wines.js";
 import Header from "./components/Header.jsx";
 import FilterBar from "./components/FilterBar.jsx";
 import WineGrid from "./components/WineGrid.jsx";
+import Pagination from "./components/Pagination.jsx";
 import WineDetail from "./components/WineDetail.jsx";
 import CartDrawer from "./components/CartDrawer.jsx";
 import ClubModal from "./components/ClubModal.jsx";
-import { serif } from "./theme.js";
 import ClubBanner from "./components/ClubBanner.jsx";
+
+const PAGE_SIZE = 10;
+const PRECIOS = WINES.map((w) => w.precio);
+const PRICE_MIN = Math.min(...PRECIOS);
+const PRICE_MAX = Math.max(...PRECIOS);
 
 export default function App() {
   const [query, setQuery] = useState("");
-  const [filters, setFilters] = useState({ bodega: "", tipo: "", provincia: "", precio: "" });
+  const [filters, setFilters] = useState({ bodega: "", tipo: "", provincia: "", precioMax: PRICE_MAX });
+  const [page, setPage] = useState(1);
   const [selectedWine, setSelectedWine] = useState(null);
   const [cart, setCart] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
@@ -23,7 +29,6 @@ export default function App() {
     bodega: [...new Set(WINES.map((w) => w.bodega))].sort(),
     tipo: [...new Set(WINES.map((w) => w.tipo))],
     provincia: [...new Set(WINES.map((w) => w.provincia))].sort(),
-    precio: ["15000", "25000", "35000", "50000"],
   }), []);
 
   const filtered = useMemo(() => {
@@ -33,10 +38,18 @@ export default function App() {
       if (filters.bodega && w.bodega !== filters.bodega) return false;
       if (filters.tipo && w.tipo !== filters.tipo) return false;
       if (filters.provincia && w.provincia !== filters.provincia) return false;
-      if (filters.precio && w.precio > Number(filters.precio)) return false;
+      if (w.precio > filters.precioMax) return false;
       return true;
     });
   }, [query, filters]);
+
+  // Volver a la página 1 cada vez que cambia la búsqueda o los filtros.
+  useEffect(() => {
+    setPage(1);
+  }, [query, filters]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   const cartCount = cart.reduce((n, i) => n + i.qty, 0);
 
@@ -57,6 +70,10 @@ export default function App() {
     });
   }
 
+  function clearCart() {
+    setCart([]);
+  }
+
   return (
     <div className="min-h-screen" style={{ background: C.bg }}>
       <Header cartCount={cartCount} onCartClick={() => setCartOpen(true)} />
@@ -70,23 +87,15 @@ export default function App() {
           filters={filters}
           setFilters={setFilters}
           options={options}
+          priceMin={PRICE_MIN}
+          priceMax={PRICE_MAX}
           resultCount={filtered.length}
-          onReset={() => { setQuery(""); setFilters({ bodega: "", tipo: "", provincia: "", precio: "" }); }}
+          onReset={() => { setQuery(""); setFilters({ bodega: "", tipo: "", provincia: "", precioMax: PRICE_MAX }); }}
         />
 
-        <WineGrid wines={filtered} onOpen={setSelectedWine} />
+        <WineGrid wines={paginated} onOpen={setSelectedWine} />
 
-        {/* <button
-          onClick={() => setClubOpen(true)}
-          className="w-full rounded-lg p-5 flex items-center justify-between text-left"
-          style={{ background: C.accentSoft, border: `1px solid ${C.border}` }}
-        >
-          <div>
-            <p className="text-lg" style={{ ...serif, color: C.text }}>El Club del Vino</p>
-            <p className="text-sm" style={{ color: C.textSoft }}>Una caja curada cada mes, para socios.</p>
-          </div>
-          <span className="text-sm underline" style={{ color: C.accent }}>Conocer más</span>
-        </button> */}
+        <Pagination page={page} totalPages={totalPages} onChange={setPage} />
       </main>
 
       <footer className="text-center text-xs text-ink-soft py-8 px-6">
@@ -102,12 +111,13 @@ export default function App() {
           items={cart}
           onClose={() => setCartOpen(false)}
           onQtyChange={changeQty}
+          onClear={clearCart}
           delivery={delivery}
           setDelivery={setDelivery}
         />
       )}
 
-      {clubOpen && <ClubModal onClose={() => setClubOpen(false)} />} 
+      {clubOpen && <ClubModal onClose={() => setClubOpen(false)} />}
     </div>
   );
 }

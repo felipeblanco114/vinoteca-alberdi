@@ -7,7 +7,7 @@ import { buildOrderMessage, buildWhatsAppUrl } from "../utils/whatsapp.js";
 import { WHATSAPP_NUMBER } from "../config.js";
 import { useDismiss } from "../hooks/useDismiss.js";
 
-export default function CartDrawer({ items, onClose, onQtyChange, delivery, setDelivery }) {
+export default function CartDrawer({ items, onClose, onQtyChange, delivery, setDelivery, onClear }) {
   const { closing, dismiss } = useDismiss(onClose);
   useModalEffects(dismiss);
 
@@ -27,16 +27,23 @@ export default function CartDrawer({ items, onClose, onQtyChange, delivery, setD
   function handleCheckout() {
     const message = buildOrderMessage(items, delivery, total);
     window.open(buildWhatsAppUrl(WHATSAPP_NUMBER, message), "_blank", "noopener,noreferrer");
+    onClear();
   }
 
   return (
     <div onClick={dismiss} className={`fixed inset-0 z-50 flex justify-end ${closing ? "animate-fade-out" : "animate-fade-in"}`} style={{ background: "rgba(34,31,26,0.5)" }}>
       <div onClick={(e) => e.stopPropagation()} className={`w-full max-w-sm h-full flex flex-col ${closing ? "animate-modal-out" : "animate-modal-in"}`} style={{ background: C.card }}>
-        <div className="shrink-0 flex items-center justify-between p-4 border-b" style={{ borderColor: C.border }}>
+                <div className="shrink-0 flex items-center justify-between p-4 border-b" style={{ borderColor: C.border }}>
           <h2 className="text-lg" style={{ ...serif, color: C.text }}>Tu pedido</h2>
-          <button onClick={dismiss} aria-label="Cerrar"><X size={20} color={C.textSoft} /></button>
+          <div className="flex items-center gap-3">
+            {items.length > 0 && (
+              <button onClick={onClear} className="text-xs underline" style={{ color: C.textSoft }}>
+                Limpiar todo
+              </button>
+            )}
+            <button onClick={dismiss} aria-label="Cerrar"><X size={20} color={C.textSoft} /></button>
+          </div>
         </div>
-
         <div className="flex-1 overflow-y-auto p-4">
           {items.length === 0 && (
             <p className="text-sm" style={{ color: C.textSoft }}>Todavía no agregaste vinos.</p>
