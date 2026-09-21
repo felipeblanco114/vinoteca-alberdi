@@ -14,4 +14,4 @@ export const C = {
   headerScrolledText: "#3B4636",
 };
 
-export const serif = { fontFamily: "'Fraunces', Georgia, serif" };
+export const serif = { fontFamily: "'argent-cf', Georgia, serif", fontWeight: 400 };
