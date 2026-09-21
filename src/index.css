@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* html, body {
+  overflow-x: hidden;
+} */
+
 body {
     font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
 }

@@ -52,7 +52,7 @@ export default function ClubBanner({ onOpen, onOpenWine }) {
 
           <p
             className="text-3xl sm:text-4xl md:text-5xl leading-[1.05] md:leading-[0.95] mb-6 font-[200]"
-            style={{ ...serif, color: "#FFF8ED" }}
+            style={{ ...serif, color: "#FFF8ED", fontWeight: '200' }}
           >
             Unite al Club del vino, <br />
             el punto de{" "}

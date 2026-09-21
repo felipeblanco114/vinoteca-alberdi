@@ -6,8 +6,8 @@ export default function WineCard({ wine, onOpen }) {
   return (
     <button
       onClick={() => onOpen(wine)}
-      className="flex flex-col h-full w-full text-left rounded-lg border overflow-hidden cursor-pointer"
-      style={{ background: C.card, borderColor: C.border }}
+      className="flex flex-col h-full w-full text-left rounded-lg overflow-hidden cursor-pointer transition-shadow duration-200 lg:hover:shadow-xl"
+      style={{ background: C.card }}
     >
       <div
         className="shrink-0 flex items-center justify-center overflow-hidden aspect-[3/5]"
@@ -21,9 +21,9 @@ export default function WineCard({ wine, onOpen }) {
       </div>
       <div className="flex-1 flex flex-col p-4 lg:p-5">
         <p className="text-lg leading-snug" style={{ ...serif, color: C.text }}>{wine.nombre}</p>
-        <p className="text-xs mt-1" style={{ color: C.textSoft }}>{wine.anio} · {wine.bodega}</p>
+        <p className="text-xs mt-1" style={{ color: C.textSoft }}>{wine.bodega}</p>
         <div className="flex items-center justify-between mt-auto pt-3">
-          <span className="text-xs" style={{ color: C.textSoft }}></span>
+          <span className="text-xs" style={{ color: C.textSoft }}>{wine.anio}</span>
           <span className="text-sm font-medium" style={{ color: C.text }}>{formatPrice(wine.precio)}</span>
         </div>
       </div>
